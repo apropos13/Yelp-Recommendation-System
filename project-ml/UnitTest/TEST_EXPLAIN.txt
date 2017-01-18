@@ -1,0 +1,51 @@
+In implementing the test case, we consider a very simple scenario where 
+we consider only three users (u0,u1,u2) and three restaurants (r0, r1, r2).
+
+The ratings of each user for a particular restaurant can be summarized in the
+following table: 
+
+T:
+
+	r0	r1	r2
+
+u0	5	4	5
+
+u1  	1	2	2
+
+u2	5	4	4
+
+The entry e_{ij} = s signifies that user u_i has rated restaurant r_j with s stars.
+
+Now we conceal some of the data and try to predict the values in order to fill in the
+table and test the accuracy of our algorithm. 
+
+T:
+
+	r0	r1	r2
+
+u0	5	4	5
+
+u1  	1	2	x1
+
+u2	5	x2	4
+
+This example is deliberately constructed in such a way as to be able to intuitively
+guess the missing entries in the table T, even without knowing the true values.
+ More precisely, we see that user u_0 and u_1 have opposite taste in restaurants while u_0 and u_1 seem to be very similar. Finally, from the data available to us it would seem that u_1 and u_2 have differences in the way they would rate the same restaurant. 
+
+Therefore, given this data one would intuitively predict that x2 should be relatively high, since u_0 has rated the same restaurant as high. Nevertheless, x1 would be relatively low since both u_0 and u_2 have rated the business high. 
+
+The way we try to predict this rating is through the SVD++ algorithm where we deduce 
+vectors p_u and q_i s.t. p_u_j \dot q_i_k =predicted rating of user u_j for restaurant 
+q_k. 
+
+Let R(u,r) be the rating of user u for restaurant r. Then after running our algorithm we 
+get that:
+R(1,2)=x2=2.2857
+R(2,1)=x1=3.7857
+
+calculating the RMSE error we get that;
+RMSE=\sqrt{ (2.2857-2)^2 + (3.7857-3)^2 } = 0.69 which shows that our prediction is 
+accurate. 
+
+
